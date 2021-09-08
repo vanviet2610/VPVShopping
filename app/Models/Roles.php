@@ -6,14 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Permission extends Model
+class Roles extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $guarded = [];
-
-    function getChildALL()
-    {
-        return $this->hasMany(Permission::class,'parent_id');
-    }
+    protected $fillable = [];
+  
 }

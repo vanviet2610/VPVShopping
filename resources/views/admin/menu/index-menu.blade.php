@@ -29,7 +29,7 @@
                                         <th scope="col" style="width: 1%">#</th>
                                         <th class="pl-4" scope="col" style="width: 30%">Tên</th>
                                         <th scope="col">ID Cha</th>
-                                        <th scope="col" style="width: 20%">Action</th>
+                                        <th scope="col" style="width: 20%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

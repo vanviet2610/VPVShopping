@@ -1,6 +1,6 @@
 @extends('layoutmaster.master_admin')
 @section('title')
-    <title>Listpermission</title>
+    <title>PermissionTrash</title>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -14,28 +14,28 @@
             <div class="row ">
                 <div class="col-md-12 ">
                     @if (session('msg'))
-                        <div id="msg" class="alert-sm alert-success p-2 mt-1">
+                        <div class="alert-sm alert-success p-2 mt-1">
                             {{ session('msg') }}
                         </div>
                     @endif
                     @if (session('msgerr'))
-                        <div id="msg" class="alert-sm alert-danger p-2 mt-1">
+                        <div class="alert-sm alert-success p-2 mt-1">
                             {{ session('msgerr') }}
                         </div>
                     @endif
                     <div class=" shadow card mt-2">
                         <div class="card-header  bg-primary">
-                            <h3 class="card-title">Danh sách permission</h3>
+                            <h3 class="card-title">Danh sách permission đã xóa</h3>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="width: 1%">#</th>
+                                        <th scope="col">#</th>
                                         <th class="pl-4" scope="col">Tên</th>
-                                        <th class="pl-4" scope="col">Nội dung</th>
-                                        <th scope="col">ID Cha</th>
-                                        <th scope="col" style="width: 20%"></th>
+                                        <th class="pl-4" scope="col">Tên</th>
+                                        <th scope="col">Thuộc thư mục cha</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,21 +46,24 @@
                                             <td>{{ $item->display_name }}</td>
                                             <td>{{ $item->parent_id }}</td>
                                             <td class="project-actions ">
-                                                <a class="btn btn-info btn-sm"
-                                                    href="{{ route('permission.edit', ['id' => $item->id]) }}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Sửa
-                                                </a>
                                                 <form style="display: inline;"
-                                                    action="{{ route('permission.delete', ['id' => $item->id]) }}"
-                                                    method="POST">
-                                                    {{ method_field('DELETE') }}
+                                                    action="{{ route('permission.restore', ['id' => $item->id]) }}"
+                                                    method="post">
                                                     @csrf
-                                                    <button class="btn btn-danger btn-sm" type="submit" href="">
+                                                    <button type="submit" class="btn btn-info btn-sm">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Khôi phục
+                                                    </button>
+                                                </form>
+                                                <form style="display: inline;"
+                                                    action="{{ route('permission.destroy', ['id' => $item->id]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash">
                                                         </i>
-                                                        Xóa
+                                                        Xóa vĩnh viễn
                                                     </button>
                                                 </form>
                                             </td>
@@ -70,6 +73,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
@@ -94,7 +98,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

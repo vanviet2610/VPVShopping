@@ -48,7 +48,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <input type="submit" value="Thêm" class="btn btn-success float-left">
+                        <input type="submit" value="sửa" class="btn btn-success float-left">
                         <!-- /.card -->
                     </form>
                 </div>

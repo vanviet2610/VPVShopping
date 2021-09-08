@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +67,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/create', [PermissionController::class, 'store'])->name('permission.store');
         Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
         Route::post('/edit/{id}', [PermissionController::class, 'update'])->name('permission.update');
-        Route::delete('/delete', [PermissionController::class, 'delete'])->name('permission.delete');
+        Route::delete('/delete/{id}', [PermissionController::class, 'delete'])->name('permission.delete');
+        Route::get('/trash', [PermissionController::class, 'trash'])->name('permission.trash');
+        Route::post('/trash/{id}', [PermissionController::class, 'restore'])->name('permission.restore');
+        Route::post('/destroy/{id}', [PermissionController::class, 'destroy'])->name('permission.destroy');
+    });
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name('role.index');
+        Route::get('/create', [RoleController::class, 'create'])->name('role.create');
     });
 });

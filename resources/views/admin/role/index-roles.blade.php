@@ -1,14 +1,12 @@
 @extends('layoutmaster.master_admin')
-@section('title')
-    <title>Listpermission</title>
-@endsection
+
 @section('content')
     <div class="content-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-md-12 mt-4">
-                    <a href="{{ route('permission.create') }}" class="btn btn-success float-left">Thêm</a>
-                    <a href="{{ route('permission.trash') }}" class="btn btn-warning ml-2 float-left">Đã xóa</a>
+                    <a href="{{ route('role.create') }}" class="btn btn-success float-left">Thêm</a>
+                    <a href="" class="btn btn-warning ml-2 float-left">Đã xóa</a>
                 </div>
             </div>
             <div class="row ">
@@ -34,17 +32,15 @@
                                         <th scope="col" style="width: 1%">#</th>
                                         <th class="pl-4" scope="col">Tên</th>
                                         <th class="pl-4" scope="col">Nội dung</th>
-                                        <th scope="col">ID Cha</th>
-                                        <th scope="col" style="width: 20%"></th>
+                                        <th scope="col" style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($permission as $key => $item)
+                                    @foreach ($role as $key => $item)
                                         <tr>
                                             <th scope="row">{{ $permission->firstItem() + $key }}</th>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->display_name }}</td>
-                                            <td>{{ $item->parent_id }}</td>
                                             <td class="project-actions ">
                                                 <a class="btn btn-info btn-sm"
                                                     href="{{ route('permission.edit', ['id' => $item->id]) }}">
@@ -77,19 +73,19 @@
             <div class="row ">
                 <div class="col-12">
                     <div class=" float-left card px-4 py-2 ">
-                        @if ($permission->total() == 0)
+                        @if ($role->total() == 0)
                             Danh sách trống
                         @else
                             danh sách từ
-                            {{ $permission->firstItem() }}
+                            {{ $role->firstItem() }}
                             đến
-                            {{ $permission->lastItem() }}
+                            {{ $role->lastItem() }}
                             có tất cả
-                            {{ $permission->total() }}
+                            {{ $role->total() }}
                         @endif
                     </div>
                     <div class=" float-right">
-                        {{ $permission->links() }}
+                        {{ $role->links() }}
                     </div>
 
                 </div>

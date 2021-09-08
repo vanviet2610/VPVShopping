@@ -1,6 +1,6 @@
 @extends('layoutmaster.master_admin')
 @section('title')
-    <title>Đã Xóa</title>
+    <title>MenuTrash</title>
 @endsection
 @section('content')
     <div class="content-wrapper">

@@ -47,28 +47,27 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-user-cog"></i>
-                      <p>
-                        Admin
-                        <i class="fas fa-angle-left right"></i>
-                      </p>
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>
+                            Admin
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
                     </a>
-                    <ul class="nav nav-treeview" >
-                      <li class="nav-item">
-                        <a href="{{ route('permission.index') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Phân quyền</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="../search/enhanced.html" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Vai trò</p>
-                        </a>
-                      </li>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Phân quyền</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('role.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vai trò</p>
+                            </a>
+                        </li>
                     </ul>
-                  </li>
-
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
