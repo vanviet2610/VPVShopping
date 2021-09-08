@@ -63,9 +63,19 @@ class PermissionController extends Controller
             'slug' => Str::slug($req->name),
         ]);
         if ($permission) {
-            return redirect()->back()->with('msg','Chỉnh sửa thành công');
-        }else{
-            return redirect()->back()->with('msgerr','Chỉnh sửa thất bại');
+            return redirect()->back()->with('msg', 'Chỉnh sửa thành công');
+        } else {
+            return redirect()->back()->with('msgerr', 'Chỉnh sửa thất bại');
+        }
+    }
+
+    function delete($id)
+    {
+        $permission = $this->permission->find($id)->delete();
+        if ($permission) {
+            return redirect()->back()->with('msg', 'Xóa  thành công');
+        } else {
+            return redirect()->back()->with('msgerr', 'Xóa thất bại');
         }
     }
 

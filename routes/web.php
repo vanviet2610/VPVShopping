@@ -66,5 +66,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/create', [PermissionController::class, 'store'])->name('permission.store');
         Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
         Route::post('/edit/{id}', [PermissionController::class, 'update'])->name('permission.update');
+        Route::delete('/delete', [PermissionController::class, 'delete'])->name('permission.delete');
     });
 });
