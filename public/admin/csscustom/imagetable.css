@@ -1,0 +1,10 @@
+.image-list-table{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+.image-add-form{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
