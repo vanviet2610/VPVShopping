@@ -7,7 +7,7 @@
         <div class="content">
             <div class="row ">
                 <div class="col-md-12 mt-4">
-                    <form action="{{ route('permission.update',['id'=>$permission->id]) }}" method="post">
+                    <form action="{{ route('permission.update', ['id' => $permission->id]) }}" method="post">
                         @csrf
                         <div class="card card-primary">
                             <div class="card-header">
@@ -23,12 +23,13 @@
 
                             <div class="card-body">
                                 @if (session('msg'))
-                                    <div class="alert alert-success">
+                                    <div id="msg" class="alert alert-success">
                                         {{ session('msg') }}
                                     </div>
                                 @endif
+
                                 @if (session('msgerr'))
-                                    <div class="alert alert-danger">
+                                    <div id="msgerr" class="alert alert-danger">
                                         {{ session('msgerr') }}
                                     </div>
                                 @endif

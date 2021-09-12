@@ -25,10 +25,14 @@
 
                             <div class="card-body">
                                 @if (session('msg'))
-                                    <div class="form-group">
-                                        <div class="alert-sm alert-success p-2">
-                                            {{ session('msg') }}
-                                        </div>
+                                    <div id="msg" class="alert alert-success">
+                                        {{ session('msg') }}
+                                    </div>
+                                @endif
+
+                                @if (session('msgerr'))
+                                    <div id="msgerr" class="alert alert-danger">
+                                        {{ session('msgerr') }}
                                     </div>
                                 @endif
 

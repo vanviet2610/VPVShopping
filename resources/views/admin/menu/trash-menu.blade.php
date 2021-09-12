@@ -14,8 +14,14 @@
             <div class="row ">
                 <div class="col-md-12 ">
                     @if (session('msg'))
-                        <div class="alert-sm alert-success p-2 mt-1">
+                        <div id="msg" class="alert alert-success">
                             {{ session('msg') }}
+                        </div>
+                    @endif
+
+                    @if (session('msgerr'))
+                        <div id="msgerr" class="alert alert-danger">
+                            {{ session('msgerr') }}
                         </div>
                     @endif
                     <div class=" shadow card mt-2">

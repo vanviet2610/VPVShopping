@@ -14,8 +14,14 @@
             <div class="row ">
                 <div class="col-md-12 ">
                     @if (session('msg'))
-                        <div id="msg" class="alert-sm alert-success p-2 mt-1">
+                        <div id="msg" class="alert alert-success">
                             {{ session('msg') }}
+                        </div>
+                    @endif
+
+                    @if (session('msgerr'))
+                        <div id="msgerr" class="alert alert-danger">
+                            {{ session('msgerr') }}
                         </div>
                     @endif
                     @if (session('msgerr'))
@@ -87,7 +93,7 @@
                         @endif
                     </div>
                     <div class=" float-right">
-                        {{ $category->links() }}
+                        {{ $category->onEachSide(1)->links() }}
                     </div>
 
                 </div>

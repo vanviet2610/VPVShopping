@@ -15,8 +15,14 @@
                             {{ session('msg') }}
                         </div>
                     @endif
+                    @if (session('msg'))
+                        <div id="msg" class="alert alert-success">
+                            {{ session('msg') }}
+                        </div>
+                    @endif
+
                     @if (session('msgerr'))
-                        <div id="msg" class="alert alert-sm alert-danger mt-2">
+                        <div id="msgerr" class="alert alert-danger">
                             {{ session('msgerr') }}
                         </div>
                     @endif

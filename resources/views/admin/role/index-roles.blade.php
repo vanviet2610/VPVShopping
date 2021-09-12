@@ -12,12 +12,13 @@
             <div class="row ">
                 <div class="col-md-12 ">
                     @if (session('msg'))
-                        <div id="msg" class="alert-sm alert-success p-2 mt-1">
+                        <div id="msg" class="alert alert-success">
                             {{ session('msg') }}
                         </div>
                     @endif
+
                     @if (session('msgerr'))
-                        <div id="msg" class="alert-sm alert-danger p-2 mt-1">
+                        <div id="msgerr" class="alert alert-danger">
                             {{ session('msgerr') }}
                         </div>
                     @endif
@@ -38,12 +39,12 @@
                                 <tbody>
                                     @foreach ($role as $key => $item)
                                         <tr>
-                                            <th scope="row">{{ $permission->firstItem() + $key }}</th>
+                                            <th scope="row">{{ $role->firstItem() + $key }}</th>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->display_name }}</td>
                                             <td class="project-actions ">
                                                 <a class="btn btn-info btn-sm"
-                                                    href="{{ route('permission.edit', ['id' => $item->id]) }}">
+                                                    href="{{ route('role.edit', ['id' => $item->id]) }}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
                                                     Sửa

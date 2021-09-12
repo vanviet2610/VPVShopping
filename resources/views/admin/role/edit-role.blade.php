@@ -12,7 +12,7 @@
         <div class="content">
             <div class="row ">
                 <div class="col-md-12 mt-4">
-                    <form action="{{ route('role.store') }}" method="post">
+                    <form action="{{ route('role.update', ['id' => $role->id]) }}" method="post">
                         @csrf
                         <div class="card card-primary">
                             <div class="card-header">
@@ -40,7 +40,7 @@
                                 @endif
                                 <div class="form-group">
                                     <label for="name_menu">Tên vai trò</label>
-                                    <input type="text" name="name" id="name_menu"
+                                    <input type="text" name="name" value="{{ $role->name }}" id="name_menu"
                                         class="form-control @error('name') is-invalid @enderror">
                                 </div>
                                 @error('name')
@@ -50,7 +50,7 @@
                                 @enderror
                                 <div class="form-group">
                                     <label for="">Nội dung vai trò</label>
-                                    <input type="text" name="display" id=""
+                                    <input type="text" name="display" id="" value="{{ $role->display_name }}"
                                         class="form-control @error('display') is-invalid @enderror">
                                 </div>
                                 @error('display')
@@ -84,7 +84,6 @@
                                             <th scope="col" style="width: 15%;"></th>
                                             <th scope="col" style="width: 15%;"></th>
                                             <th scope="col" style="width: 15%;"></th>
-                                            <th scope="col" style="width: 15%;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,8 +92,9 @@
                                                 <th scope="row">{{ $item->display_name }}</th>
                                                 @foreach ($item->getChildALL as $itemChild)
                                                     <td>
-                                                        <input type="checkbox" value="{{ $itemChild->id }}"
-                                                            name="permission[]" id="">
+                                                        <input type="checkbox" @if ($rolePermission->contains($itemChild))? checked : ""
+                                                        @endif value="{{ $itemChild->id }}"
+                                                        name="permission[]" id="">
                                                         <br>
                                                         {{ $itemChild->display_name }}
                                                     </td>
@@ -105,7 +105,7 @@
                                 </table>
                             </div>
                         </div>
-                        <input type="submit" value="Thêm" class="btn btn-success float-left">
+                        <input type="submit" value="Chỉnh sửa" class="btn btn-success float-left">
                         <!-- /.card -->
                     </form>
                 </div>
