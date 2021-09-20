@@ -11,4 +11,9 @@ class Permission extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    function getChildALL()
+    {
+        return $this->hasMany(Permission::class,'parent_id');
+    }
 }

@@ -23,8 +23,14 @@
 
                             <div class="card-body">
                                 @if (session('msg'))
-                                    <div class="alert alert-success">
+                                    <div id="msg" class="alert alert-success">
                                         {{ session('msg') }}
+                                    </div>
+                                @endif
+
+                                @if (session('msgerr'))
+                                    <div id="msgerr" class="alert alert-danger">
+                                        {{ session('msgerr') }}
                                     </div>
                                 @endif
                                 <div class="form-group">
@@ -48,7 +54,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <input type="submit" value="Thêm" class="btn btn-success float-left">
+                        <input type="submit" value="sửa" class="btn btn-success float-left">
                         <!-- /.card -->
                     </form>
                 </div>

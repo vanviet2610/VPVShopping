@@ -33,7 +33,7 @@
                                         <th class="pl-4" scope="col" style="width: 20%">Tên</th>
                                         <th scope="col" style="width: 39%">Nội dung</th>
                                         <th scope="col " style="width: 20%">Hình ảnh</th>
-                                        <th class="text-center" scope="col " style="width: 20%;">Action</th>
+                                        <th class="text-center" scope="col " style="width: 20%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

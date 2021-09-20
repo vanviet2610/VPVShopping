@@ -7,7 +7,7 @@
         <div class="content">
             <div class="row ">
                 <div class="col-md-12 mt-4">
-                    <form action="{{ route('permission.update',['id'=>$permission->id]) }}" method="post">
+                    <form action="{{ route('permission.update', ['id' => $permission->id]) }}" method="post">
                         @csrf
                         <div class="card card-primary">
                             <div class="card-header">
@@ -23,12 +23,13 @@
 
                             <div class="card-body">
                                 @if (session('msg'))
-                                    <div class="alert alert-success">
+                                    <div id="msg" class="alert alert-success mt-1">
                                         {{ session('msg') }}
                                     </div>
                                 @endif
+
                                 @if (session('msgerr'))
-                                    <div class="alert alert-danger">
+                                    <div id="msgerr" class="alert alert-danger mt-1">
                                         {{ session('msgerr') }}
                                     </div>
                                 @endif
@@ -63,7 +64,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <input type="submit" value="Thêm" class="btn btn-success float-left">
+                        <input type="submit" value="sửa" class="btn btn-success float-left">
                         <!-- /.card -->
                     </form>
                 </div>

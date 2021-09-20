@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Components\Recusive;
 use App\Http\Requests\PermissionRequest;
 use App\Models\Permission;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -74,6 +75,30 @@ class PermissionController extends Controller
         $permission = $this->permission->find($id)->delete();
         if ($permission) {
             return redirect()->back()->with('msg', 'Xóa  thành công');
+        } else {
+            return redirect()->back()->with('msgerr', 'Xóa thất bại');
+        }
+    }
+
+    function trash()
+    {
+        $permission = $this->permission->onlyTrashed()->paginate(10);
+        return view('admin.permission.trash-permission', compact('permission'));
+    }
+    function restore($id)
+    {
+        $permission = $this->permission->onlyTrashed()->find($id)->restore();
+        if ($permission) {
+            return redirect()->back()->with('msg', 'Khôi phục  thành công');
+        } else {
+            return redirect()->back()->with('msgerr', 'Khôi phục thất bại');
+        }
+    }
+    function destroy($id)
+    {
+        $permission = $this->permission->onlyTrashed()->find($id)->forceDelete();
+        if ($permission) {
+            return redirect()->back()->with('msg', 'Xóa thành công');
         } else {
             return redirect()->back()->with('msgerr', 'Xóa thất bại');
         }

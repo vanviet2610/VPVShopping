@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
     function index()
     {
-        $category = $this->category->Paginate(10);
+        $category = $this->category->paginate(10);
         return view('admin.category.index-category', compact('category'));
     }
     function create()
