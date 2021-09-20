@@ -1,17 +1,13 @@
 @extends('layoutmaster.master_admin')
-
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/csscustom/imagetable.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/csscustom/role.css') }}">
 @endsection
-
 @section('content')
     <div class="content-wrapper">
         <div class="content">
             <div class="row">
                 <div class="col-md-12 mt-4">
                     <a href="{{ route('role.create') }}" class="btn btn-success float-left">Thêm</a>
-                    <a href="{{ route('role.trash') }}" class="btn btn-warning ml-2 float-left">Đã xóa</a>
                 </div>
             </div>
             <div class="row ">
@@ -29,7 +25,7 @@
                     @endif
                     <div class=" shadow card mt-2">
                         <div class="card-header  bg-primary">
-                            <h3 class="card-title">Danh sách vai trò</h3>
+                            <h3 class="card-title">Danh sách đã xóa role</h3>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-striped">
@@ -48,19 +44,19 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->display_name }}</td>
                                             <td class="project-actions ">
-                                                <a class="btn btn-info btn-sm"
-                                                    href="{{ route('role.edit', ['id' => $item->id]) }}">
-                                                    <i class="fas fa-pencil-alt">
+                                                <button type="button" id="btnrestore"
+                                                    data-url="{{ route('role.restore', ['id' => $item->id]) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    <i class="fas fa-trash-restore">
                                                     </i>
-                                                    Sửa
-                                                </a>
-
-                                                <button class="btn btn-danger btn-sm deleteRole"
-                                                    data-url="{{ route('role.delete', ['id' => $item->id]) }}"
-                                                    type="button">
+                                                    Phục hồi
+                                                </button>
+                                                <button type="button"
+                                                    data-url="{{ route('role.destroy', ['id' => $item->id]) }}"
+                                                    class="btn btn-danger btn-sm mt-1" type="submit">
                                                     <i class="fas fa-trash">
                                                     </i>
-                                                    Xóa
+                                                    Xóa vĩnh viễn
                                                 </button>
                                             </td>
                                         </tr>
@@ -70,38 +66,73 @@
                             </table>
                         </div>
                     </div>
+                    <!-- /.card -->
                 </div>
             </div>
             <div class="row ">
                 <div class="col-12">
+                    <div class=" float-left card px-4 py-2 ">
+                        @if ($role->total() == 0)
+                            Danh sách trống
+                        @else
+                            danh sách từ
+                            {{ $role->firstItem() }}
+                            đến
+                            {{ $role->lastItem() }}
+                            có tất cả
+                            {{ $role->total() }}
+                        @endif
+                    </div>
                     <div class=" float-right">
                         {{ $role->onEachSide(1)->links() }}
                     </div>
+
                 </div>
             </div>
+            {{-- modal Restore --}}
+            <div class="modal fade" id="modalRestore" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thông báo
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc muốn khôi phục?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy Bỏ</button>
+                            <button type="button" id="okConfirmRestore" class="btn btn-primary">Đồng ý
+                                khôi phục</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- modal delete destroy --}}
+            <div class="modal fade" id="modaldelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thông báo
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc muốn xóa vĩnh viễn?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy Bỏ</button>
+                            <button type="button" id="okConfirmDestroy" class="btn btn-primary">Đồng ý
+                                xóa</button>
+                        </div>
+                    </div>
+                </div>
 
-        </div>
-    </div>
-    {{-- form modal show delete --}}
-    <div class="modal fade" id="formdelete" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông báo
-                    </h5>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc muốn xóa?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy Bỏ</button>
-                    <button type="button" id="okConfirm" class="btn btn-primary">Đồng ý xóa</button>
-                </div>
             </div>
         </div>
     </div>
-
-    {{-- modal success --}}
+    {{-- success modal --}}
     <div id="success" class="modal fade show" aria-modal="true">
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
@@ -112,36 +143,23 @@
                     <h5 class="modal-title w-100 mt-2 text-center">Khôi Phục Thành Công!</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Chúc mừng bạn đã khôi phục thành công nhé !!!!!</p>
+                    <p>Chúc mừng bạn đã Xóa thành công nhé !!!!!</p>
                 </div>
             </div>
         </div>
     </div>
-
-
-    {{-- <div class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Xóa Thành công</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <img class="image-success  mx-auto" src="{{ asset('images/success.png') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
 @endsection
 @section('js')
     <script>
         $(document).ready(function() {
-            $('body').on('click', '.deleteRole', function(e) {
-                const cursor = $(this);
-                url = cursor.data('url');
-                $('#formdelete').modal('show');
-                $('#okConfirm').unbind('click');
-                $('#okConfirm').click(function() {
+
+            $('body').on('click', '#btnrestore', function() {
+                let cursor = $(this);
+                let url = cursor.data('url');
+                $('#modalRestore').modal('show');
+                $('#okConfirmRestore').unbind('click');
+                $('#okConfirmRestore').click(function(e) {
+                    e.preventDefault();
                     $.ajax({
                         type: "POST",
                         url,
@@ -149,23 +167,18 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         beforeSend: () => {
-                            console.log(url);
-                            $('#formdelete').modal('hide');
+                            $('#modalRestore').modal('hide');
                             $('#success').modal('show');
                         },
-                        success: data => {
+                        success: function(data) {
                             if (data.code == 200) {
                                 $('#success').modal('hide');
                                 window.location.reload();
                             }
-                        },
-                        error: err => {
-                            console.log(err);
                         }
                     });
                 });
             });
-
         });
     </script>
 @endsection

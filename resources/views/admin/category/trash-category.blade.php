@@ -52,7 +52,7 @@
                                                     method="post">
                                                     @csrf
                                                     <button class="btn btn-info btn-sm" href="">
-                                                        <i class="fas fa-pencil-alt">
+                                                        <i class="fas fa-trash-restore">
                                                         </i>
                                                         Phục hồi
                                                     </button>

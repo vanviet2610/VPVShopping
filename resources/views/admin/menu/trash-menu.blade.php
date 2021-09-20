@@ -47,7 +47,7 @@
                                             <td class="project-actions ">
                                                 <a class="btn btn-info btn-sm"
                                                     href="{{ route('menu.restore', ['id' => $item->id]) }}">
-                                                    <i class="fas fa-pencil-alt">
+                                                    <i class="fas fa-trash-restore">
                                                     </i>
                                                     Khôi phục
                                                 </a>

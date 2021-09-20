@@ -14,13 +14,13 @@
             <div class="row ">
                 <div class="col-md-12 ">
                     @if (session('msg'))
-                        <div id="msg" class="alert alert-success">
+                        <div id="msg" class="alert alert-success mt-1">
                             {{ session('msg') }}
                         </div>
                     @endif
 
                     @if (session('msgerr'))
-                        <div id="msgerr" class="alert alert-danger">
+                        <div id="msgerr" class="alert alert-danger mt-1">
                             {{ session('msgerr') }}
                         </div>
                     @endif
@@ -90,7 +90,7 @@
                         @endif
                     </div>
                     <div class=" float-right">
-                        {{ $permission->links() }}
+                        {{ $permission->onEachSide(1)->links() }}
                     </div>
 
                 </div>

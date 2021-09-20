@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" hidden content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('title')
     <!-- Google Font: Source Sans Pro -->
@@ -11,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/toastr/toastr.min.js') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('css')
     @yield('js-head')
 </head>
@@ -49,8 +52,11 @@
     <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
     @yield('js')
     <script>
-        $(function() {
-            bsCustomFileInput.init();
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#msg').remove();
+                $('#msgerr').remove();
+            }, 3000);
         });
     </script>
 

@@ -8,7 +8,6 @@
             <div class="row">
                 <div class="col-md-12 mt-4">
                     <a href="{{ route('permission.create') }}" class="btn btn-success float-left">Thêm</a>
-                    <a href="{{ route('permission.trash') }}" class="btn btn-warning ml-2 float-left">Đã xóa</a>
                 </div>
             </div>
             <div class="row ">
@@ -51,7 +50,7 @@
                                                     method="post">
                                                     @csrf
                                                     <button type="submit" class="btn btn-info btn-sm">
-                                                        <i class="fas fa-pencil-alt">
+                                                        <i class="fas fa-trash-restore">
                                                         </i>
                                                         Khôi phục
                                                     </button>
