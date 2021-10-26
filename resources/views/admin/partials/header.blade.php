@@ -37,7 +37,7 @@
                     width="30" height="30" class="rounded-circle">
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ route('auth.logout') }}">Log Out</a>
+                <a class="dropdown-item" href="{{ route('auth.logout') }}">Log out</a>
             </div>
         </li>
     </ul>

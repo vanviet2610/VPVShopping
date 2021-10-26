@@ -50,9 +50,8 @@
                                         {!! $stringOptions !!}
                                     </select>
                                 </div>
-
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.card-bo  dy -->
                         </div>
                         <input type="submit" value="Thêm" class="btn btn-success float-left">
                         <!-- /.card -->

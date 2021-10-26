@@ -2,7 +2,8 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/csscustom/imagetable.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/csscustom/role.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/csscustom/success.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/csscustom/deletemodal.css') }}">
 @endsection
 
 @section('content')
@@ -14,25 +15,14 @@
                     <a href="{{ route('role.trash') }}" class="btn btn-warning ml-2 float-left">Đã xóa</a>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="col-md-12 ">
-                    @if (session('msg'))
-                        <div id="msg" class="alert alert-success mt-1">
-                            {{ session('msg') }}
-                        </div>
-                    @endif
-
-                    @if (session('msgerr'))
-                        <div id="msgerr" class="alert alert-danger mt-1">
-                            {{ session('msgerr') }}
-                        </div>
-                    @endif
-                    <div class=" shadow card mt-2">
+                    <div class="shadow card mt-2">
                         <div class="card-header  bg-primary">
                             <h3 class="card-title">Danh sách vai trò</h3>
                         </div>
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 1%">#</th>
@@ -41,45 +31,17 @@
                                         <th scope="col" style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($role as $key => $item)
-                                        <tr>
-                                            <th scope="row">{{ $role->firstItem() + $key }}</th>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->display_name }}</td>
-                                            <td class="project-actions ">
-                                                <a class="btn btn-info btn-sm"
-                                                    href="{{ route('role.edit', ['id' => $item->id]) }}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Sửa
-                                                </a>
-
-                                                <button class="btn btn-danger btn-sm deleteRole"
-                                                    data-url="{{ route('role.delete', ['id' => $item->id]) }}"
-                                                    type="button">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Xóa
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
+                                <tbody id="table-role">
+                                    @include('admin.role.partials-role.index-table-role')
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row ">
-                <div class="col-12">
-                    <div class=" float-right">
-                        {{ $role->onEachSide(1)->links() }}
-                    </div>
-                </div>
+            <div class="row" id="quantityRole">
+                @include('admin.role.partials-role.view-bottom-quantity')
             </div>
-
         </div>
     </div>
     {{-- form modal show delete --}}
@@ -107,30 +69,38 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="icon-box">
-                        <i class="material-icons"></i>
+                        <i class="material-icons">&#xe5ca;</i>
                     </div>
-                    <h5 class="modal-title w-100 mt-2 text-center">Khôi Phục Thành Công!</h5>
+                    <h5 class="modal-title w-100 mt-2 text-center">Success</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Chúc mừng bạn đã khôi phục thành công nhé !!!!!</p>
+                    <p class="text-center" id="message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-    {{-- <div class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id="error" class="modal fade">
+        <div class="modal-dialog modal-confirm-delete">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Xóa Thành công</h5>
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title w-100 mt-2 text-center">Sorry!</h4>
                 </div>
-                <div class="modal-body text-center">
-                    <img class="image-success  mx-auto" src="{{ asset('images/success.png') }}" alt="">
+                <div class="modal-body">
+                    <p class="text-center" id="err"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 @endsection
 @section('js')
@@ -141,7 +111,8 @@
                 url = cursor.data('url');
                 $('#formdelete').modal('show');
                 $('#okConfirm').unbind('click');
-                $('#okConfirm').click(function() {
+                $('#okConfirm').click(function(e) {
+                    e.preventDefault();
                     $.ajax({
                         type: "POST",
                         url,
@@ -149,18 +120,22 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         beforeSend: () => {
-                            console.log(url);
                             $('#formdelete').modal('hide');
-                            $('#success').modal('show');
                         },
                         success: data => {
                             if (data.code == 200) {
-                                $('#success').modal('hide');
-                                window.location.reload();
+                                $('#message').html(data.message + "!");
+                                $('#success').modal('show');
+                                $('#table-role').html(data.view);
+                                $('#quantityRole').html(data.quantityRole);
+                            } else if (data.code == 404) {
+                                $('#err').html(data.message + "!");
+                                $('#error').modal('show');
                             }
                         },
-                        error: err => {
-                            console.log(err);
+                        error: (err) => {
+                            $('#err').html(err.responseJSON['message'] + ' (Request Fails)');
+                            $('#error').modal('show');
                         }
                     });
                 });

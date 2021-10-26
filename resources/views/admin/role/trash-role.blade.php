@@ -1,6 +1,6 @@
 @extends('layoutmaster.master_admin')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/csscustom/role.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/csscustom/success.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -37,31 +37,8 @@
                                         <th scope="col" style="width: 20%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($role as $key => $item)
-                                        <tr>
-                                            <th scope="row">{{ $role->firstItem() + $key }}</th>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->display_name }}</td>
-                                            <td class="project-actions ">
-                                                <button type="button" id="btnrestore"
-                                                    data-url="{{ route('role.restore', ['id' => $item->id]) }}"
-                                                    class="btn btn-info btn-sm">
-                                                    <i class="fas fa-trash-restore">
-                                                    </i>
-                                                    Phục hồi
-                                                </button>
-                                                <button type="button"
-                                                    data-url="{{ route('role.destroy', ['id' => $item->id]) }}"
-                                                    class="btn btn-danger btn-sm mt-1" type="submit">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Xóa vĩnh viễn
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
+                                <tbody id="trash-role">
+                                    @include('admin.role.partials-role.trash-table-role')
                                 </tbody>
                             </table>
                         </div>
@@ -69,25 +46,8 @@
                     <!-- /.card -->
                 </div>
             </div>
-            <div class="row ">
-                <div class="col-12">
-                    <div class=" float-left card px-4 py-2 ">
-                        @if ($role->total() == 0)
-                            Danh sách trống
-                        @else
-                            danh sách từ
-                            {{ $role->firstItem() }}
-                            đến
-                            {{ $role->lastItem() }}
-                            có tất cả
-                            {{ $role->total() }}
-                        @endif
-                    </div>
-                    <div class=" float-right">
-                        {{ $role->onEachSide(1)->links() }}
-                    </div>
-
-                </div>
+            <div class="row" id="quantityRole">
+                @include('admin.role.partials-role.view-bottom-quantity')
             </div>
             {{-- modal Restore --}}
             <div class="modal fade" id="modalRestore" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -130,6 +90,7 @@
                 </div>
 
             </div>
+
         </div>
     </div>
     {{-- success modal --}}
@@ -140,10 +101,13 @@
                     <div class="icon-box">
                         <i class="material-icons"></i>
                     </div>
-                    <h5 class="modal-title w-100 mt-2 text-center">Khôi Phục Thành Công!</h5>
+                    <h5 class="modal-title w-100 mt-2 text-center" id="message">!</h5>
                 </div>
                 <div class="modal-body">
-                    <p>Chúc mừng bạn đã Xóa thành công nhé !!!!!</p>
+                    <p id="content-modal"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -152,7 +116,6 @@
 @section('js')
     <script>
         $(document).ready(function() {
-
             $('body').on('click', '#btnrestore', function() {
                 let cursor = $(this);
                 let url = cursor.data('url');
@@ -168,13 +131,39 @@
                         },
                         beforeSend: () => {
                             $('#modalRestore').modal('hide');
-                            $('#success').modal('show');
                         },
                         success: function(data) {
                             if (data.code == 200) {
-                                $('#success').modal('hide');
-                                window.location.reload();
+                                $('#message').html(data.message + "!");
+                                $('#content-modal').html(data.content);
+                                $('#success').modal('show');
+                                $('#trash-role').html(data.roleOnlytrash);
+                                $('#quantityRole').html(data.quantity);
                             }
+                        }
+                    });
+                });
+            });
+            $('body').on('click', '#destroy', function() {
+                let cursor = $(this);
+                let url = cursor.data('url');
+                $('#modaldelete').modal('show');
+                $('#okConfirmDestroy').click(function() {
+                    $.ajax({
+                        type: "post",
+                        url,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        beforeSend: () => {
+                            $("#modaldelete").modal('hide');
+                        },
+                        success: function(data) {
+                            $('#message').html(data.message);
+                            $('#content-modal').html(data.content);
+                            $('#success').modal('show');
+                            $('#trash-role').html(data.view);
+                            $('#quantityRole').html(data.quantity);
                         }
                     });
                 });

@@ -36,7 +36,7 @@
                                         <th class="pl-4" scope="col">Tên</th>
                                         <th class="pl-4" scope="col">Nội dung</th>
                                         <th scope="col">ID Cha</th>
-                                        <th scope="col" style="width: 20%"></th>
+                                        <th scope="col" style="width: 10%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,14 +44,13 @@
                                         <tr>
                                             <th scope="row">{{ $permission->firstItem() + $key }}</th>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->display_name }}</td>
-                                            <td>{{ $item->parent_id }}</td>
+                                            <td>{{ Str::ucfirst($item->display_name)  }}</td>
+                                            <td>{{ Str::ucfirst($item->getParent_id->name ?? 'Permission cha') }}</td>
                                             <td class="project-actions ">
                                                 <a class="btn btn-info btn-sm"
                                                     href="{{ route('permission.edit', ['id' => $item->id]) }}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
-                                                    Sửa
                                                 </a>
                                                 <form style="display: inline;"
                                                     action="{{ route('permission.delete', ['id' => $item->id]) }}"
@@ -61,13 +60,11 @@
                                                     <button class="btn btn-danger btn-sm" type="submit" href="">
                                                         <i class="fas fa-trash">
                                                         </i>
-                                                        Xóa
                                                     </button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>

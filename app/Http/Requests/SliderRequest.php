@@ -33,7 +33,7 @@ class SliderRequest extends FormRequest
     {
         return [
             'name.required' => 'vui lòng nhập tên slider',
-            'name.required' => 'vui lòng nhập nội dung',
+            'description.required' => 'vui lòng nhập nội dung',
             'image.max' => 'Hình ảnh quá lớn giới hạn dưới 10MB'
         ];
     }
