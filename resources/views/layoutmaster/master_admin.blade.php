@@ -13,7 +13,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/toastr/toastr.min.js') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('css')
     @yield('js-head')
 </head>

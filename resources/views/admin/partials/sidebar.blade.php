@@ -22,7 +22,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('menu.index') }}" class="nav-link">
+                    <a href="{{ route('menu.index') }}"
+                        class="nav-link {{ Request::routeIs('menu.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             Danh sách menu
@@ -30,7 +31,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('slider.index') }}" class="nav-link">
+                    <a href="{{ route('slider.index') }}"
+                        class="nav-link {{ Request::routeIs('slider.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             Danh sách Slider
@@ -38,7 +40,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('category.index') }}" class="nav-link">
+                    <a href="{{ route('category.index') }}"
+                        class="nav-link {{ Request::routeIs('category.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             Danh sách category
@@ -46,7 +49,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('category.index') }}"
+                        class="nav-link {{ Request::routeIs('product.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            Danh sách Product
+                        </p>
+                    </a>
+                </li>
+                <li
+                    class="nav-item {{ Request::routeIs('permission.*') || Request::routeIs('role.*') || Request::routeIs('user.*') ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ Request::routeIs('permission.*') || Request::routeIs('role.*') || Request::routeIs('user.*') ? 'active' : '' }} ">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>
                             Admin
@@ -55,19 +69,22 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('permission.index') }}" class="nav-link">
+                            <a href="{{ route('permission.index') }}"
+                                class="nav-link {{ Request::routeIs('permission.*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Phân quyền</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link">
+                        <li class="nav-item ">
+                            <a href="{{ route('role.index') }}"
+                                class="nav-link {{ Request::routeIs('role.*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Vai trò</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link">
+                            <a href="{{ route('user.index') }}"
+                                class="nav-link {{ Request::routeIs('user.*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Người Dùng</p>
                             </a>

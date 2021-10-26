@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Components\Recusive;
 use App\Http\Requests\PermissionRequest;
 use App\Models\Permission;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PermissionController extends Controller
 {
-    //
     private $permission;
     function __construct(Permission $permission)
     {
@@ -20,7 +18,7 @@ class PermissionController extends Controller
     }
     function index()
     {
-        $permission = $this->permission->Paginate(10);
+        $permission = $this->permission->with('getParent_id')->paginate(10);
         return view('admin.permission.index-permission', compact('permission'));
     }
 
