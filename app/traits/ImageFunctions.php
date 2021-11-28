@@ -17,4 +17,17 @@ trait ImageFunctions
             'file_path' => '/storage/' . $folder . '/' . $fileNameHash . '.' . $lastFilePath
         ];
     }
+
+    function CreateLoadFile($reqFile, $nameFolder)
+    {
+        $fileName = Str::random(20);
+        $fileNameOfImage = $reqFile->getClientOriginalName();
+        $fileTail = $reqFile->getClientOriginalExtension();
+        $folderDayUpload = date('Y-m-d');
+        $reqFile->storeAs('public/' . $nameFolder . '/' . $folderDayUpload, $fileName . '.' . $fileTail);
+        return  [
+            'file_name' => $fileNameOfImage,
+            'file_path' => '/storage/' . $nameFolder . '/' . $folderDayUpload . '/' . $fileName . '.' . $fileTail
+        ];
+    }
 }

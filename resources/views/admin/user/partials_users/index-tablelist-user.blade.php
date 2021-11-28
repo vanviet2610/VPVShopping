@@ -1,6 +1,6 @@
-@foreach ($users as $item)
+@foreach ($users as $index => $item)
     <tr>
-        <th scope="row">{{ $users->firstItem() }}</th>
+        <th scope="row">{{ $users->firstItem() + $index }}</th>
         <td style="padding-left: 0.5rem">{{ $item->name }}</td>
         <td>Otto</td>
         <td>Otto</td>

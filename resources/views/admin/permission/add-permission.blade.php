@@ -5,7 +5,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="content">
-            <div class="row ">
+            <div class="row">
                 <div class="col-md-12 mt-4">
                     <form action="{{ route('permission.store') }}" method="post">
                         @csrf

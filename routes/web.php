@@ -3,20 +3,21 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/login', [UserController::class, 'index'])->name('login');
+Route::get('/', [UserController::class, 'index'])->name('login');
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/store', [UserController::class, 'store'])->name('auth.regis');
 Route::post('/account', [UserController::class, 'account'])->name('auth.account');
 Route::get('/logout', [UserController::class, 'logOut'])->name('auth.logout');
-Route::get('/error401', function () {
-    return view('layoutmaster.401');
-});
+Route::get('/error403', function () {
+    return view('layoutmaster.403');
+})->name('403');
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -93,6 +94,14 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::prefix('product')->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('product.index')->middleware('checkpermis:view-product');
+            Route::get('/create', [ProductController::class, 'create'])->name('product.create')->middleware('checkpermis:create-product');
+            Route::post('/create', [ProductController::class, 'store'])->name('product.store');
+            Route::get('/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
+            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit')->middleware('checkpermis:edit-product');
+            Route::post('/approved', [ProductController::class, 'approved'])->name('product.approved');
+            Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+            Route::post('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete')->middleware('checkpermis:delete-product');
         });
     });
 });

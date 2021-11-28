@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
+use App\Service\ProductService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
     }
 
     /**
@@ -25,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind(ProductService::class, function ($app) {
+            return new ProductService($app->make(Product::class));
+        });
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
     }

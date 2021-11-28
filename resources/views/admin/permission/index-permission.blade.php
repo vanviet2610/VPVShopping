@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="row ">
-                <div class="col-md-12 ">
+                <div class="col-md-12">
                     @if (session('msg'))
                         <div id="msg" class="alert alert-success mt-1">
                             {{ session('msg') }}
@@ -44,7 +44,7 @@
                                         <tr>
                                             <th scope="row">{{ $permission->firstItem() + $key }}</th>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ Str::ucfirst($item->display_name)  }}</td>
+                                            <td>{{ Str::ucfirst($item->display_name) }}</td>
                                             <td>{{ Str::ucfirst($item->getParent_id->name ?? 'Permission cha') }}</td>
                                             <td class="project-actions ">
                                                 <a class="btn btn-info btn-sm"
@@ -92,7 +92,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

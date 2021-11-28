@@ -68,7 +68,7 @@
     <div class="mainbox">
         <div class="err">4</div>
         <i class="far fa-question-circle fa-spin"></i>
-        <div class="err2">1</div>
+        <div class="err2">3</div>
         <div class="msg">Bạn chưa đủ quyền để sử dụng lệnh hoặc truy cập nội dung này<p>Vui lòng di chuyển về
                 lại <a href="#">Trang Chủ</a> có thể click tại đây.</p>
         </div>
