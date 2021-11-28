@@ -61,7 +61,7 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
             return redirect()->route('menu.index');
         } else {
-            return redirect('login')->with('msg', 'Đăng nhập thất bại');
+            return redirect('')->with('msg', 'Đăng nhập thất bại');
         }
     }
 

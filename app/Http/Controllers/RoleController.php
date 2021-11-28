@@ -27,8 +27,6 @@ class RoleController extends Controller
     function create()
     {
         $permission = $this->permission->where('parent_id', 0)->get();
-
-        dd($permission->getChildALL);
         return view('admin.role.add-role', compact('permission'));
     }
 

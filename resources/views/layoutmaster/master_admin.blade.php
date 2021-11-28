@@ -11,8 +11,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/plugins/toastr/toastr.min.js') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.css') }}">
     @yield('css')
     @yield('js-head')
 </head>

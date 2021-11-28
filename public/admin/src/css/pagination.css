@@ -1,0 +1,15 @@
+.pagination{ 
+    height: 30px;
+  
+}
+.pagination ul   {
+    list-style-type: none;
+}
+.pagination ul li span {
+  text-align: center;
+  color: pink;
+}
+.pagination a:hover{
+    background-color: #007bff;
+    color: white;
+}
