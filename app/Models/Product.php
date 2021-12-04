@@ -13,7 +13,7 @@ class Product extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [
-        'id', 'title', 'price', 'content', 'status', 'file_name', 'file_path', 'user_id', 'category_id'
+        'id', 'title', 'price', 'content', 'status', 'file_name',  'file_path', 'user_id', 'category_id'
     ];
 
     public function images()

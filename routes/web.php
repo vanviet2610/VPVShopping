@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Clients\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -10,7 +11,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [UserController::class, 'index'])->name('login');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/login', [UserController::class, 'index'])->name('login');
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/store', [UserController::class, 'store'])->name('auth.regis');
 Route::post('/account', [UserController::class, 'account'])->name('auth.account');
@@ -38,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
             Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit')->middleware('checkpermis:edit-slider');
             Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+            Route::post('/state/{id}', [SliderController::class, 'state'])->name('slider.state');
             Route::get('/trash', [SliderController::class, 'trash'])->name('slider.trash')->middleware('checkpermis:trash-slider');
             Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete')->middleware('checkpermis:delete-slider');
             Route::get('/restore/{id}', [SliderController::class, 'restore'])->name('slider.restore');

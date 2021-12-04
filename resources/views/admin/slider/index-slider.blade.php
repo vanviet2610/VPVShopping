@@ -3,7 +3,7 @@
     <title>Slider</title>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/csscustom/imagetable.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/src/css/indexproduct.css') }}">
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -26,14 +26,15 @@
                             <h3 class="card-title">Danh sách Slider</h3>
                         </div>
                         <div class="card-body table-responsive p-0">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 1%">#</th>
-                                        <th class="pl-4" scope="col" style="width: 20%">Tên</th>
-                                        <th scope="col" style="width: 39%">Nội dung</th>
-                                        <th scope="col " style="width: 20%">Hình ảnh</th>
-                                        <th class="text-center" scope="col " style="width: 20%;"></th>
+                                        <th class="pl-4" scope="col">Tên</th>
+                                        <th scope="col">Nội dung</th>
+                                        <th scope="col ">Hình ảnh</th>
+                                        <th scope="col ">Hình ảnh</th>
+                                        <th scope="col "></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,8 +44,23 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->description }}</td>
                                             <td>
-                                                <img class="image-list-table" accept="image/*"
+                                                <img class="image-list-table table-image" accept="image/*"
                                                     src="{{ asset($item->file_path) }}" alt="{{ $item->file_name }}">
+                                            </td>
+                                            <td>
+                                                @if ($item->status == 0)
+                                                    <input type="checkbox" id="state" name="status"
+                                                        data-url="{{ route('slider.state', ['id' => $item->id]) }}"
+                                                        data-bootstrap-switch data-off-color="danger"
+                                                        data-on-color="success">
+                                                @else
+                                                    <input type="checkbox" id="state" name="status"
+                                                        data-url="{{ route('slider.state', ['id' => $item->id]) }}"
+                                                        data-bootstrap-switch checked data-off-color="danger"
+                                                        data-on-color="success">
+                                                @endif
+
+
                                             </td>
                                             <td class="  project-actions">
                                                 <a class="btn btn-info btn-sm"
@@ -60,8 +76,8 @@
                                                     Delete
                                                 </a>
                                             </td>
-                                        </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -71,8 +87,42 @@
                 </div>
             </div>
             <div class="row">
-                {{ $sliders->links() }}
+                {{ $sliders->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script src="{{ asset('admin/plugins/bootstrap-switch/js/bootstrap-switch.js') }}"></script>
+    <script>
+        $('input[name="status"]').bootstrapSwitch('state');
+
+        $(document).ready(function() {
+            $('input[name="status"]').on('switchChange.bootstrapSwitch', function(event, state) {
+
+                var url = $(this).data('url');
+                var data = $(this).serialize();
+
+                $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+                $.ajax({
+                    type: "POST",
+                    url,
+                    data,
+                    dataType: "json",
+                    success: function(response) {
+
+                    },
+                    error: function(error) {}
+                });
+
+            });
+
+
+        });
+    </script>
+
 @endsection

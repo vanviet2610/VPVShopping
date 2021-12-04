@@ -29,10 +29,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 1%;padding-left: 0rem">#</th>
-                                        <th scope="col" style="width: 19%">Title</th>
-                                        <th scope="col" style="width: 30%">Content</th>
-                                        <th scope="col" style="width: 10%">Price</th>
-                                        <th scope="col" style="width: 30%">Image</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Content</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Brands</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col" style="width: 10%"></th>
                                     </tr>
                                 </thead>

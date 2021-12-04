@@ -28,9 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(ProductService::class, function ($app) {
-            return new ProductService($app->make(Product::class));
-        });
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
     }

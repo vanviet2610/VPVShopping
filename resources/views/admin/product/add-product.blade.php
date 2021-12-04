@@ -3,7 +3,7 @@
     <title>AddProduct</title>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/src/plusign/csss/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/csscustom/success.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/csscustom/deletemodal.css') }}">
 @endsection
@@ -27,22 +27,24 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name_menu">Title Product</label>
-                                    <input type="text" name="title" id="title" class="form-control">
+                                    <input placeholder="Tiêu đề sản phẩm" type="text" name="title" id="title"
+                                        class="form-control">
                                     <span class="error_text text-danger title-error"></span>
 
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Content Product</label>
-                                    <textarea name="content" id="content" class="form-control"></textarea>
+                                    <textarea placeholder="Nội dung sản phẩm" name="content" id="content"
+                                        class="form-control"></textarea>
                                     <span class="error_text text-danger content-error"></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Price Product</label>
                                     <div class="input-group">
-                                        <input type="text" name="price" id="price" class="form-control"
-                                            value="">
+                                        <input placeholder="Giá sản phẩm" type="text" name="price" id="price"
+                                            class="form-control" value="">
                                         <div class="input-group-append">
                                             <span class="input-group-text money-format"></span>
                                         </div>
@@ -105,8 +107,8 @@
 @endsection
 
 @section('js')
-    {{-- <script type="text/javascript" src="{{ asset('admin/src/js/select2-tags.js') }}"></script> --}}
-    <script src="{{ asset('admin/src/plusign/js/select2.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('admin/src/js/select2-tags.js') }}"></script>
     <script src="{{ asset('admin/src/js/productadmin/product-add.js') }}"></script>
+
 @endsection

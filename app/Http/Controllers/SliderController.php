@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SliderRequest;
 use App\Models\Slider;
 use App\Traits\ImageFunctions;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -19,7 +20,7 @@ class SliderController extends Controller
     //
     function index()
     {
-        $sliders = $this->slider->cursorPaginate(15);
+        $sliders = $this->slider->paginate(15);
         return view('admin.slider.index-slider', compact('sliders'));
     }
     function create()
@@ -35,7 +36,8 @@ class SliderController extends Controller
                 'name' => $req->name,
                 'description' => $req->description,
                 'file_name' => $iamge['file_name'],
-                'file_path' => $iamge['file_path']
+                'file_path' => $iamge['file_path'],
+                'status' => 0,
             ]);
             DB::commit();
             return redirect()->route('slider.create')->with('msg', 'Thêm slider thành công');
@@ -63,11 +65,13 @@ class SliderController extends Controller
                     'description' => $req->description,
                     'file_name' => $images['file_name'],
                     'file_path' => $images['file_path'],
+                    'status' => 0
                 ]);
             } else {
                 $sliders->update([
                     'name' => $req->name,
                     'description' => $req->description,
+                    'status' => 0
                 ]);
             }
             DB::commit();
@@ -107,6 +111,22 @@ class SliderController extends Controller
             return redirect()->back()->with('msg', 'Xóa vĩnh viễn thành công');
         } else {
             return redirect()->back()->with('msgerr', 'Xóa thất bại');
+        }
+    }
+
+    public function state($id, Request $req)
+    {
+        $sliders = Slider::find($id);
+        if (!empty($sliders)) {
+            if (isset($req->status)) {
+                $sliders->update([
+                    'status' => 1
+                ]);
+            } else {
+                $sliders->update([
+                    'status' => 0
+                ]);
+            }
         }
     }
 }

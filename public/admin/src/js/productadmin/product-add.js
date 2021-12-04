@@ -24,8 +24,8 @@ function featureImage() {
 }
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
+    currency: 'VND',
+    minimumFractionDigits: 0
 });
 $(document).ready(function () {
     $('#imagemutil').on("change", previewImages);
