@@ -7,12 +7,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tags;
 use App\Traits\ImageFunctions;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ProductService
@@ -131,7 +129,6 @@ class ProductService
     public function UpdateProduct($id, $req)
     {
         $products = Product::find($id);
-
         try {
             DB::beginTransaction();
             if ($req->hasFile('imagemutil')) {

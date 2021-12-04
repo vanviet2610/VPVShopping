@@ -3,7 +3,7 @@
     <title>Update Product</title>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ asset('admin/src/plusign/csss/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/csscustom/deletemodal.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/csscustom/success.css') }}">
 @endsection
@@ -152,8 +152,8 @@
         }
         var formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 2
+            currency: 'VND',
+            minimumFractionDigits: 0
         });
         $('.money-format').text(formatter.format($('#price').val()));
         $(document).ready(function() {

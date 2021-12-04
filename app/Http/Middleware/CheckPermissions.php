@@ -7,7 +7,6 @@ use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class CheckPermissions
 {
@@ -20,6 +19,7 @@ class CheckPermissions
      */
     public function handle(Request $request, Closure $next, $permission)
     {
+
         // $user =
         //     DB::table('users')
         //     ->join('role_user', 'role_user.role_id', '=', 'users.id')
