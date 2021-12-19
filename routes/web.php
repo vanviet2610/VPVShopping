@@ -11,11 +11,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('customer.home');
+Route::get('/details/{id}', [HomeController::class, 'details'])->name('customer.details');
 Route::get('/login', [UserController::class, 'index'])->name('login');
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/store', [UserController::class, 'store'])->name('auth.regis');
-Route::post('/account', [UserController::class, 'account'])->name('auth.account');
+Route::post('/account', [UserController::class, 'login'])->name('auth.account');
 Route::get('/logout', [UserController::class, 'logOut'])->name('auth.logout');
 Route::get('/error403', function () {
     return view('layoutmaster.403');

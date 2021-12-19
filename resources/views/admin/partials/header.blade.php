@@ -33,8 +33,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ asset('admin/dist/img/vanviet.jpg') }}"
-                    width="30" height="30" class="rounded-circle">
+                <img src="{{ asset('admin/dist/img/vanviet.jpg') }}" width="30" height="30" class="rounded-circle">
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{{ route('auth.logout') }}">Log out</a>

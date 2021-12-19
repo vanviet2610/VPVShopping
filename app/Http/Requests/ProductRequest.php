@@ -27,7 +27,6 @@ class ProductRequest extends FormRequest
             return [
                 'title' => 'required',
                 'content' => 'required',
-                'brands' => 'required',
                 'price' => 'required|numeric',
                 'imagefeature' => 'required|max:10240',
                 'imagemutil' => 'required|max:30720',
@@ -38,7 +37,6 @@ class ProductRequest extends FormRequest
             return [
                 'title' => 'required',
                 'content' => 'required',
-                'brands' => 'required',
                 'price' => 'required|numeric',
                 'imagefeature' => 'nullable|max:10240',
                 'imagemutil' => 'nullable|max:30720',
@@ -56,7 +54,6 @@ class ProductRequest extends FormRequest
                 'content.required' => "Vui lòng nhập nội dung sản phẩm",
                 'price.required' => "Vui lòng nhập giá sản phẩm",
                 'price.numeric' => "vui lòng nhập bằng số",
-                'brands.required' => 'vui lòng nhập nhãn hiệu của sản phẩm',
                 'imagefeature.required' => "Vui lòng nhập hình ảnh chính sản phẩm",
                 'imagefeature.max' => "giới hạn hình ảnh chính product 10MB",
                 'imagemutil.required' => "Vui lòng nhập  hình ảnh kèm thêm sản phẩm",
@@ -69,7 +66,6 @@ class ProductRequest extends FormRequest
                 'category.required' => "Vui lòng chọn thể loại sản phẩm",
                 'content.required' => "Vui lòng nhập nội dung sản phẩm",
                 'price.required' => "Vui lòng nhập giá sản phẩm",
-                'brands.required' => 'vui lòng nhập nhãn hiệu của sản phẩm',
                 'price.numeric' => "vui lòng nhập bằng số",
                 'imagefeature.max' => "giới hạn hình ảnh chính product 10MB",
                 'imagemutil.max' => "Giới hạn imahình ảnh kèm thêm sản phẩm 30MB",
