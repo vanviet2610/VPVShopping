@@ -32,7 +32,6 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Content</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Brands</th>
                                         <th scope="col">Image</th>
                                         <th scope="col" style="width: 10%"></th>
                                     </tr>
@@ -73,11 +72,12 @@
                         dataType: "json",
                         success: function(res) {
                             if (res.code === 200) {
-                                $('#table').html(res.content);
-                                $('#pagination').html(res.pagination);
-                                $('#msgsuccess').text(res.message);
+                                console.log(res.contents);
                                 $('#confirmdelete').modal('hide');
+                                $('#msgsuccess').text(res.message);
                                 $('#success').modal('show');
+                                $('#table').html(res.contents);
+                                $('#pagination').html(res.pagination);
                             }
                         },
                         error: function(err) {

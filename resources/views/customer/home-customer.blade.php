@@ -1,5 +1,9 @@
 @extends('layoutmaster.masterlayout-customer')
 
+@section('titlehead')
+    <title>VPVShoping</title>
+@endsection
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('client/plugins/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('client/plugins/css/responsive.css') }}">
@@ -58,7 +62,6 @@
                                     </div>
                                 @endif
                             @endforeach
-
                         </div>
                         <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                             <i class="fa fa-angle-left"></i>
@@ -151,40 +154,44 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{{ asset('client/plugins/images/home/product5.jpg') }}" alt="" />
-                                            <h2>{{ $productitem->price }}</h2>
-                                            <p>{{ $productitem->title }}</p>
+                                            <img src="{{ asset($productitem->file_path) }}"
+                                                alt="{{ $productitem->file_name }}" />
+                                            <h2>{{ number_format($productitem->price) . ' VND' }}</h2>
+                                            <p>{{ Str::limit($productitem->title, 30, '...') }}</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
                                                     class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
-                                                <h2>{{ $productitem->price }}</h2>
+                                                <h2>{{ number_format($productitem->price) . ' VND' }}</h2>
                                                 <p>{{ $productitem->title }}</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
                                         </div>
                                         <!-- image slate  nếu muốn có -->
-                                        {{-- <img src="{{ asset('client/plugins/images/home/sale.png') }}" class="new"
-                                    alt="" /> --}}
+                                        <div class="new"></div>
+                                        {{-- <img src="{{ asset('client/plugins/images/home/sale.png') }}"
+                                            class="new" alt="" /> --}}
                                     </div>
                                     <div class="choose">
                                         <ul class="nav nav-pills nav-justified">
-                                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                            <li><a href="#"><i class="fa fa-plus-square"></i>Yêu thích</a></li>
+                                            <li><a href="{{ route('customer.details', ['id' => $productitem->id]) }}"><i
+                                                        class="fa fa-info"></i>Xem chi tiết</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
 
 @endsection
 
@@ -193,4 +200,11 @@
     <script src="{{ asset('client/plugins/js/price-range.js') }}"></script>
     <script src="{{ asset('client/plugins/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('client/plugins/js/main.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+
+        });
+    </script>
+
 @endsection

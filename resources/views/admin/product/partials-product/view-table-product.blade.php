@@ -2,10 +2,10 @@
     <tr>
         <th style="padding-left: 1rem" scope="row">{{ $products->firstItem() + $index }}</th>
         <td style="padding-left: 0.3rem;padding-right: 0.3rem">{{ $item->title }}</td>
-        <td>{{ $item->content }}</td>
-        <td>{{ $item->price }}</td>
-        <td>{{ $item->price }}</td>
-        <td><img class="table-image" src="{{ asset($item->file_path) }}" alt="">
+        <td style="padding-left: 0.3rem;padding-right: 0.3rem">{{ $item->content }}</td>
+        <td style=" padding-left: 0.3rem;padding-right: 0.3rem">{{ $item->price }}</td>
+        <td style=" padding-left: 0.3rem;padding-right: 0.3rem"><img class="table-image"
+                src="{{ asset($item->file_path) }}" alt="">
         </td>
         <td>
             <a class="btn btn-success mt-1 btn-sm" href="{{ route('product.detail', ['id' => $item->id]) }}">

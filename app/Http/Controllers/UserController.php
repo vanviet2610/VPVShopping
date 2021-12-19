@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRegisRequest;
 use App\Models\Roles;
 use App\Models\User;
+use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,17 +14,16 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    private $user, $role;
+    private $userService;
 
-    function __construct(User $user, Roles $role)
+    function __construct(UserService $userService)
     {
-        $this->user = $user;
-        $this->role = $role;
+        $this->userService = $userService;
     }
 
     function index()
     {
-        return view('auth.user_login');
+        return $this->userService->indexViewLoginUser();
     }
 
     function create()
@@ -31,55 +31,24 @@ class UserController extends Controller
         return view('auth.user-register');
     }
 
-    function store(LoginRegisRequest $req)
+    public function login(LoginRegisRequest $req)
     {
-        try {
-            $this->user->create([
-                'name' => $req->name,
-                'email' => $req->email,
-                'password' => bcrypt($req->password),
-            ]);
-            return redirect('register')->with('msg', 'Đăng ký thành công ');
-        } catch (\Exception $err) {
-            Log::error("Register Add => " . $err->getMessage() . " Line => " . $err);
-        }
+        return $this->userService->LoginAccountUser($req);
     }
-
-    function account(Request $req)
+    function logOut(Request $req)
     {
-        $this->validate(
-            $req,
-            [
-                'email' => 'required',
-                'password' => 'required'
-            ],
-            [
-                'email.required' => 'Vui lòng nhập email',
-                'password.required' => 'Vui lòng nhập password'
-            ]
-        );
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
-            return redirect()->route('menu.index');
-        } else {
-            return redirect('')->with('msg', 'Đăng nhập thất bại');
-        }
-    }
-
-    function logOut()
-    {
-        Auth::logout();
-        return redirect()->route('login');
+        return $this->userService->LogoutAcoountUser($req);
     }
 
     function adminIndex()
     {
-        $users = $this->user->oldest()->paginate(10);
+        $users = User::oldest()->paginate(10);
         return view('admin.user.index-user', compact('users'));
     }
     function adminViewsAddRole($id)
     {
-        $users = $this->user->find($id);
-        $roles = $this->role->get();
+        $users =  User::find($id);
+        $roles = Roles::all();
         return view('admin.user.profile-user', compact('users', 'roles'));
     }
     function adminCreateRole($id, Request $req)

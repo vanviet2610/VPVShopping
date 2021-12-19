@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Service\HomeClientService;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Contracts\Session\Session;
 
 class HomeController extends Controller
 {
@@ -17,5 +19,10 @@ class HomeController extends Controller
     public function index()
     {
         return $this->homeClientService->viewIndexHomeCustomer();
+    }
+
+    public function details($id)
+    {
+        return $this->homeClientService->ShowDetailsProducts($id);
     }
 }

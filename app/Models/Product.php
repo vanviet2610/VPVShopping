@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Tags::class, 'product_tag', 'product_id', 'tag_id')->withTimestamps();
     }
+
+    public function user_product()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

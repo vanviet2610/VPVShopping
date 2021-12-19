@@ -23,12 +23,19 @@ class LoginRegisRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'bail|required|min:3',
-            'email' => 'bail|required|email:filter|unique:users,email',
-            'password' => 'required',
-            'password_confirm' => 'bail|required|same:password'
-        ];
+        if ($this->route()->uri() === "account") {
+            return [
+                'email' => 'required|email:filter',
+                'password' => 'bail|required|min:6'
+            ];
+        } else {
+            return [
+                'name' => 'bail|required|min:3',
+                'email' => 'bail|required|email:filter|unique:users,email',
+                'password' => 'required',
+                'password_confirm' => 'bail|required|same:password'
+            ];
+        }
     }
     function messages()
     {
@@ -37,6 +44,7 @@ class LoginRegisRequest extends FormRequest
             'name.min' => 'Tên không nhỏ hơn 3 ký tự',
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Vui lòng nhập đúng định dạng email ví dụ @gmail.com',
+            'password.min' => 'vui lòng nhập password hơn 8 ký tự',
             'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password_confirm.required' => 'Vui lòng nhập lại mật khẩu',

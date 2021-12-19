@@ -24,7 +24,7 @@ class ProductService
 
     public function ViewProductAll()
     {
-        return Product::paginate(10);
+        return Product::latest()->paginate(10);
     }
 
     public function ViewCategoryAll($idSelectedOptions)
@@ -215,17 +215,16 @@ class ProductService
     public function deleteProduct($id)
     {
         $deleteProducts = Product::find($id);
-
-        $products =  Product::oldest()->paginate(10);
-        $viewRenderIndexProductTableProduct = view('admin.product.partials-product.view-table-product', compact('products'))->render();
-        $viewRenderPaginationProduct = view('admin.product.partials-product.view-pagination-product', compact('products'))->render();
         if (!empty($deleteProducts)) {
             $deleteProducts->delete();
+            $products =  Product::oldest()->paginate(10);
+            $viewRenderIndexProductTableProduct = view('admin.product.partials-product.view-table-product', compact('products'))->render();
+            $viewRenderPaginationProduct = view('admin.product.partials-product.view-pagination-product', compact('products'))->render();
             return response()->json(
                 [
                     'code' => 200,
                     'message' => 'delete product success',
-                    'content' => $viewRenderIndexProductTableProduct,
+                    'contents' => $viewRenderIndexProductTableProduct,
                     'pagination' => $viewRenderPaginationProduct
                 ],
             );

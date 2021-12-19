@@ -22,8 +22,6 @@ class CreateProductsTable extends Migration
             $table->string('file_path');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
-            $table->string('brands');
-            $table->string('brands_slug');
             $table->integer('status');
             $table->timestamps();
             $table->softDeletes();

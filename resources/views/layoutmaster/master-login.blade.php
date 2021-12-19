@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Log in</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/googlefonts.css') }}">
@@ -26,7 +27,7 @@
     <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
-
+    @yield('js')
 </body>
 
 </html>

@@ -290,7 +290,7 @@ input, button, select, textarea {
 }
 
 a {
-    color: #428bca;
+    /* color: #428bca; */
     text-decoration: none
 }
 
@@ -311,7 +311,7 @@ img {
 
 .img-responsive {
     display: block;
-    max-width: 481px;   
+    max-width: 481px;
     max-height: 441px;
 }
 
@@ -4819,6 +4819,10 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 }
 
 .thumbnail {
+    width: 70px;
+    height: 60px;
+    opacity: 0.5;
+    margin-right: 1rem;
     display: block;
     padding: 4px;
     margin-bottom: 20px;
@@ -4828,23 +4832,6 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
     border-radius: 4px;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out
-}
-
-.thumbnail>img, .thumbnail a>img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-    margin-right: auto;
-    margin-left: auto
-}
-
-a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
-    border-color: #428bca
-}
-
-.thumbnail .caption {
-    padding: 9px;
-    color: #333
 }
 
 .alert {
@@ -6002,6 +5989,61 @@ button.close {
 
 .carousel-caption .btn {
     text-shadow: none
+}
+
+.slider-wrapper {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slider {
+    max-width: 100%;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    margin-top: 1rem;
+}
+
+.backs {
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    opacity: 0.5;
+    background-color: #FE980F;
+    margin-right: 1rem;
+}
+
+
+.nexts {
+    margin-left: 1rem;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    padding: 0.5px;
+    opacity: 0.5;
+    background-color: #FE980F;
+}
+
+
+.slider>.active {
+    opacity: 1 !important;
+    border: 1px solid #FE980F;
+}
+
+.nexts:hover {
+    opacity: 1;
+    cursor: pointer;
+
+}
+
+.backs:hover {
+    opacity: 1;
+    cursor: pointer;
+
 }
 
 @media screen and (min-width:768px) {
